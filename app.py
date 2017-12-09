@@ -282,6 +282,15 @@ def update_student_sheet():
     return ("updated", 200, {'Access-Control-Allow-Origin': '*'})
 
 
+@app.route('/update_student_feedback',methods=['POST'])
+def update_student_feedback():
+    sheet_url = "https://script.google.com/macros/s/AKfycbyg3So3815hj8EymNVD7b2MwT03-qvtrAaUuB395tf14hYHbBE/exec"
+    json_d = request.form.to_dict()
+    print(json_d)
+    r = requests.post(sheet_url,data=json_d)
+    print(r.status_code)
+    return ("updated", 200, {'Access-Control-Allow-Origin': '*'})
+
 def reg_mail(name,form_email,project):
     sg = sendgrid.SendGridAPIClient(apikey=os.environ['SENDGRID_API_KEY'])
     from_email = Email(form_email)
